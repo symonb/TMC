@@ -1,0 +1,22 @@
+{
+    "C_Cpp.errorSquiggles": "Enabled",
+    "stm32-for-vscode.openOCDPath": "openocd",
+    "stm32-for-vscode.makePath": "make",
+    "stm32-for-vscode.armToolchainPath": "/home/zgrywcio/.vscode-server/data/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/arm-none-eabi-gcc/10.2.1-1.1.2/.content/bin",
+    "cortex-debug.armToolchainPath": "/home/zgrywcio/.vscode-server/data/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/arm-none-eabi-gcc/10.2.1-1.1.2/.content/bin",
+    
+"files.associations": {
+    "ticks.h": "c",
+    "stm32f10x.h": "c",
+    "stm32f407xx.h": "c",
+    "stm32f4xx.h": "c",
+    "stm32f4xx_rcc.h": "c",
+    "bno080.h": "c",
+    "stm32f4xx_spi.h": "c",
+    "time.h": "c",
+    "arm_math.h": "c"
+},
+    "cortex-debug.openocdPath": "openocd",
+    "debug.gdbTarget": "${env:WSL_HOST_IP}:3333"
+
+}

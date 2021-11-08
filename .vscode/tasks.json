@@ -1,0 +1,110 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Make Firmware",
+            "type": "shell",
+            "command": "make all -j6",
+            "options": {
+                "cwd": "${workspaceRoot}/build"
+            }, 
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Load Firmware",
+            "type": "shell",
+            "command": "openocd.exe",
+            "args": [ 
+                "-f",
+                "interface/stlink.cfg",
+                "-f",
+                "board/st_nucleo_f4.cfg",
+                 "-c" ,
+                {
+                "value": "program ./build/main.elf verify reset exit",
+                "quoting": "strong"
+              }
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+
+        {
+            "label": "Launch OpenOCD",
+            "command": "openocd.exe",
+            "args": [
+                "-f",
+                "interface/stlink.cfg",
+               
+                "-f",
+                "${input:openocd.config}",
+                "-c",
+                "\"bindto 0.0.0.0\"",
+                //"-f","reset_config none separate"
+            ],
+            "type": "shell",
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "pattern": [
+                      {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                      }
+                    ],
+                    "background": {
+                      "activeOnStart": true,
+                      "beginsPattern": ".",
+                      "endsPattern": ".",
+                    }
+                  }
+            ]
+        },
+        
+        {
+            "label": "Build Firmware",
+            "dependsOn": [
+                "Make Firmware",
+                "Load Firmware"
+            ]
+        },
+        {
+            "label": "postdebugKill",
+            "type": "process",
+            /*"command":[
+               "${command:workbench.action.tasks.terminate}",
+              // "${command:workbench.action.acceptSelectedQuickOpenItem}"
+            ],*/
+            "command":"${command:workbench.action.tasks.terminate} Launch openOCD",
+          
+         },
+        ///openocd -f interface/stlink.cfg -f target/stm32f4x.cfg -c "bindto 0.0.0.0"
+
+    ],
+    "inputs": [
+        {
+            "id": "openocd.config",
+            "type": "pickString",
+            "description": "Select the configuration file for OpenOCD",
+            "options": [
+                "board/st_nucleo_f4.cfg"
+            ],
+            "default": "board/st_nucleo_f4.cfg"
+        }
+    ]
+}
+ 

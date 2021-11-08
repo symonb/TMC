@@ -1,0 +1,62 @@
+[
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Drivers/CMSIS/system_stm32f4xx.c.o   -c /home/zgrywcio/TMC/Drivers/CMSIS/system_stm32f4xx.c",
+  "file": "/home/zgrywcio/TMC/Drivers/CMSIS/system_stm32f4xx.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/setup.c.o   -c /home/zgrywcio/TMC/Src/setup.c",
+  "file": "/home/zgrywcio/TMC/Src/setup.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/drivers/GPIO.c.o   -c /home/zgrywcio/TMC/Src/drivers/GPIO.c",
+  "file": "/home/zgrywcio/TMC/Src/drivers/GPIO.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/drivers/USART1.c.o   -c /home/zgrywcio/TMC/Src/drivers/USART1.c",
+  "file": "/home/zgrywcio/TMC/Src/drivers/USART1.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/drivers/USART3.c.o   -c /home/zgrywcio/TMC/Src/drivers/USART3.c",
+  "file": "/home/zgrywcio/TMC/Src/drivers/USART3.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/drivers/SPI3.c.o   -c /home/zgrywcio/TMC/Src/drivers/SPI3.c",
+  "file": "/home/zgrywcio/TMC/Src/drivers/SPI3.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/Sensors/BNO080/bno080.c.o   -c /home/zgrywcio/TMC/Src/Sensors/BNO080/bno080.c",
+  "file": "/home/zgrywcio/TMC/Src/Sensors/BNO080/bno080.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/Sensors/BNO080/hw.c.o   -c /home/zgrywcio/TMC/Src/Sensors/BNO080/hw.c",
+  "file": "/home/zgrywcio/TMC/Src/Sensors/BNO080/hw.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/interrupts.c.o   -c /home/zgrywcio/TMC/Src/interrupts.c",
+  "file": "/home/zgrywcio/TMC/Src/interrupts.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/main.c.o   -c /home/zgrywcio/TMC/Src/main.c",
+  "file": "/home/zgrywcio/TMC/Src/main.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/time/time.c.o   -c /home/zgrywcio/TMC/Src/time/time.c",
+  "file": "/home/zgrywcio/TMC/Src/time/time.c"
+},
+{
+  "directory": "/home/zgrywcio/TMC/build",
+  "command": "/bin/arm-none-eabi-gcc  -I/home/zgrywcio/TMC/Src/Std_Periph/inc -I/home/zgrywcio/TMC/Src -I/home/zgrywcio/TMC/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/home/zgrywcio/TMC/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb  -Wall -fdata-sections -ffunction-sections -DARM_MATH_CM4 -D__FPU_PRESENT -g   -std=gnu11 -o CMakeFiles/main.elf.dir/Src/IO/LED.c.o   -c /home/zgrywcio/TMC/Src/IO/LED.c",
+  "file": "/home/zgrywcio/TMC/Src/IO/LED.c"
+}
+]

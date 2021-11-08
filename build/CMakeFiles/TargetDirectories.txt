@@ -1,0 +1,6 @@
+/home/zgrywcio/TMC/build/CMakeFiles/edit_cache.dir
+/home/zgrywcio/TMC/build/CMakeFiles/main.bin.dir
+/home/zgrywcio/TMC/build/CMakeFiles/rebuild_cache.dir
+/home/zgrywcio/TMC/build/CMakeFiles/main.elf.dir
+/home/zgrywcio/TMC/build/Src/CMakeFiles/rebuild_cache.dir
+/home/zgrywcio/TMC/build/Src/CMakeFiles/edit_cache.dir
