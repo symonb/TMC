@@ -2,7 +2,7 @@
 
 #ifndef HW_HAL_H_
 #define HW_HAL_H_
-#define bufferSize 276
+#define bufferSize 255
 #define headerSize 4
 #include <stdint.h>
 

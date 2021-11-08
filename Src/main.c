@@ -20,20 +20,8 @@ int main(void)
 
     setup();
 
-   
-    while (BNO080Init() == 0)
-        ;
-    enableGIRV(2000000);
-
     while (1)
     {
-        if (GIRVAvailable() == 1)
-        {
-
-            gameRV = getGIRV();
-            DelayMs(1000);
-            LED_Red_Toggle();
-        }
-        return 0;
+       
     }
 }

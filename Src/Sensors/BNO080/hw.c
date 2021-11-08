@@ -28,7 +28,7 @@ void enableInts(void)
 
 void disableInts()
 {
-   // NVIC_DisableIRQ(EXTI9_5_IRQn);
+    NVIC_DisableIRQ(EXTI9_5_IRQn);
 }
 
 void bootn(uint8_t state)

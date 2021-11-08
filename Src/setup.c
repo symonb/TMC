@@ -19,16 +19,16 @@ void initCLOCK(void)
     };                       //wait for HSI ready
     RCC->CFGR = (uint32_t)0; //reset CFGR register - source clock is set as HSI by default
 
-    //RCC->CFGR |= (RCC_CFGR_PPRE1_DIV4|RCC_CFGR_PPRE2_DIV2);
+    
     RCC->PLLCFGR = (uint32_t)0x24003010; //reset PLLCFGR register
     RCC->CIR = (uint32_t)0;              //disable all interupts
     RCC->PLLCFGR &= ~(RCC_PLLCFGR_PLLSRC);
     RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSI;
     RCC->PLLCFGR &= ~(RCC_PLLCFGR_PLLM); //reset PLLM
-    RCC->PLLCFGR |= RCC_PLLCFGR_PLLM_2;  //plm 1000 = 8
+    RCC->PLLCFGR |= RCC_PLLCFGR_PLLM_2;  //plm 1000 = 8 PLLM = 16, PLLN = 192 -->64MHz
     RCC->PLLCFGR &= ~(RCC_PLLCFGR_PLLN); //reset PLLN
 
-    RCC->PLLCFGR |= RCC_PLLCFGR_PLLN_2 | RCC_PLLCFGR_PLLN_3 | RCC_PLLCFGR_PLLN_4 | RCC_PLLCFGR_PLLN_5 | RCC_PLLCFGR_PLLN_6 | RCC_PLLCFGR_PLLN_7; //plln = 252
+    RCC->PLLCFGR |=  RCC_PLLCFGR_PLLN_2 | RCC_PLLCFGR_PLLN_3 | RCC_PLLCFGR_PLLN_4 | RCC_PLLCFGR_PLLN_5 | RCC_PLLCFGR_PLLN_6 | RCC_PLLCFGR_PLLN_7; //plln = 252
 
     RCC->PLLCFGR &= ~(RCC_PLLCFGR_PLLP); //reset PLLP
     RCC->PLLCFGR |= RCC_PLLCFGR_PLLP_1;
@@ -47,15 +47,15 @@ void initCLOCK(void)
     while (!(RCC_CFGR_SWS_PLL & RCC->CFGR))
     {
     };
-    volatile uint32_t test = (RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> 6;
-    test = (RCC->PLLCFGR & RCC_PLLCFGR_PLLP) >> 16;
+
+    RCC->CFGR |= (RCC_CFGR_PPRE1_DIV4|RCC_CFGR_PPRE2_DIV2);
     SystemCoreClockUpdate();
 }
 
 void initRCC(void)
 {
-    RCC->AHB1ENR |= (RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN | RCC_AHB1ENR_GPIODEN);
-
+    RCC->AHB1ENR |= (RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN | RCC_AHB1ENR_GPIODEN|RCC_AHB1ENR_GPIOEEN);
+    RCC->APB1ENR |= RCC_APB1ENR_SPI3EN;
     RCC->AHB1ENR |= RCC_AHB1ENR_DMA1EN;
     RCC->AHB1ENR |= RCC_AHB1ENR_DMA2EN;
 
@@ -98,9 +98,16 @@ static void initGPIO(void)
 
     GPIOC->MODER &=~(GPIO_MODER_MODER10|GPIO_MODER_MODER11|GPIO_MODER_MODER12);
     GPIOC->MODER |= (GPIO_MODER_MODER10_1|GPIO_MODER_MODER11_1|GPIO_MODER_MODER12_1);    //C10-12 AF
-    GPIOC->AFR[1] |= (0x6<<8|0x6<<12|0x6<<16);//AF6 for spi3
     GPIOC->OSPEEDR |= (GPIO_OSPEEDER_OSPEEDR10|GPIO_OSPEEDER_OSPEEDR11|GPIO_OSPEEDER_OSPEEDR12);    //high speed
+    GPIOC->AFR[1] |= (0x6<<8|0x6<<12|0x6<<16);//AF6 for spi3
 
+    /*thrusters */
+    GPIOE->MODER |= GPIO_MODER_MODER14_1|GPIO_MODER_MODER13_1|GPIO_MODER_MODER11_1|GPIO_MODER_MODER9_1;//T1, T3, T5, T7
+    GPIOB->MODER |= GPIO_MODER_MODER1_1|GPIO_MODER_MODER0_1; //T2, T4
+    GPIOA->MODER |= GPIO_MODER_MODER7_1|GPIO_MODER_MODER6_1; //T6, T8
+    GPIOA->AFR[0] |= (0x2<<12 | 0x2<<8);
+    GPIOB->AFR[0] |= (0x2 | 0x2<<4);
+    GPIOE->AFR[1] |= (0x1<<24 | 0x1<<20 | 0x1 <<12 | 0x1 <<4);
 }
 static uint8_t APBAHBPrescTable[16] = {0, 0, 0, 0, 1, 2, 3, 4, 1, 2, 3, 4, 6, 7, 8, 9};
 
@@ -170,40 +177,61 @@ void initINT(void)
 /*--------PC9 for FSM305--------*/
 SYSCFG->EXTICR[2] |= SYSCFG_EXTICR3_EXTI9_PC;  //PC9 for FSM305
 EXTI->IMR |=EXTI_IMR_MR9;                      //enable mask
-EXTI->FTSR |=EXTI_FTSR_TR9;
-EXTI->RTSR &=~EXTI_RTSR_TR9;                    //falling edge
-NVIC_SetPriority(EXTI9_5_IRQn, 1);
-//NVIC_EnableIRQ(EXTI9_5_IRQn);
+EXTI->FTSR &=~EXTI_FTSR_TR9;
+EXTI->RTSR |=EXTI_RTSR_TR9;                    //falling edge
+NVIC_SetPriority(EXTI9_5_IRQn, 0);
 /*-------------------------*/
 }
 void initSPI3(void)
 {
-    RCC->APB1ENR |= RCC_APB1ENR_SPI3EN;
-    SPI3->CR1 |= (1<<0)|(1<<1);   // CPOL=1, CPHA=1
-	
-    SPI3->CR1 |= (1<<2);  // Master Mode
-        
-    SPI3->CR1 |= (3<<3);  // BR[2:0] = 011: fPCLK/16, PCLK2 = 80MHz, SPI clk = 5MHz
-        
-    SPI3->CR1 &= ~(1<<7);  // LSBFIRST = 0, MSB first
-        
-    SPI3->CR1 |= (1<<8) | (1<<9);  // SSM=1, SSi=1 -> Software Slave Management
-        
-    SPI3->CR1 &= ~(1<<10);  // RXONLY = 0, full-duplex
-        
-    SPI3->CR1 &= ~(1<<11);  // DFF=0, 8 bit data
-        
-    SPI3->CR2 = 0;
+
+    //setup clock polarity
+    SPI3->CR1 &=(uint32_t)(0x0);
+    SPI3->CR1 |= SPI_CR1_CPHA|SPI_CR1_CPOL;
+	//setup master mode
+    SPI3->CR1 |= (SPI_CR1_MSTR);  // Master Mode
+    //APB1 - 42Mhz w want 42/16 = 2.625 Mhz good
+    SPI3->CR1 |= (SPI_CR1_BR_0|SPI_CR1_BR_1);
+    SPI3->CR1 |= SPI_CR1_SSI|SPI_CR1_SSM;
+   SPI3->CR1 &= ~(SPI_CR1_RXONLY);  // RXONLY = 0, full-duplex
+   // 
+     SPI3->CR2 = 0;
+      SPI3->CR1 |=SPI_CR1_SPE;
 }
+
+
+/* 
+  Thrusters
+    GPIOE->MODER |= GPIO_MODER_MODER14_1|GPIO_MODER_MODER13_1|GPIO_MODER_MODER11_1|GPIO_MODER_MODER9_1;//T1, T3, T5, T7
+    GPIOB->MODER |= GPIO_MODER_MODER1_1|GPIO_MODER_MODER0_1; //T2, T4
+    GPIOA->MODER |= GPIO_MODER_MODER7_1|GPIO_MODER_MODER6_1; //T6, T8
+    GPIOA->AFR[0] |= (0x2<<12 | 0x2<<8);
+    GPIOB->AFR[0] |= (0x2 | 0x2<<4);
+    GPIOE->AFR[1] |= (0x1<<24 | 0x1<<20 | 0x1 <<12 | 0x1 <<4);
+
+*/
+void initTIM1(void){
+RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;
+//timer clock is 168MHz i want 400Hz PWM = 420 000  ARR = 2048
+TIM1->ARR = 2000 - 1;
+TIM1->PSC = 210 - 1;
+TIM1->CCMR1 |= TIM_CCRM1_
+}
+void initTIM3(void){
+RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
+TIM3->ARR = 2000 - 1;
+TIM3->PSC = 105 - 1;
+//Timer clock is 84MHz i want 400Hz PWM = 210 000
+}
+
 void initSystem()
 {
     initCLOCK();
     initRCC();
+    initGPIO();
+    //initSPI3();
     initUSART1();
     initUSART3();
-    
-    initSPI3();
-    initGPIO();
     initINT();
     
 }

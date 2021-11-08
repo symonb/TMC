@@ -61,6 +61,7 @@ CMakeFiles/main.elf.dir/Src/drivers/SPI3.c.o
  ../Drivers/CMSIS/Include/core_cmSimd.h
  ../Drivers/CMSIS/Include/stm32f4xx.h
  ../Drivers/CMSIS/Include/system_stm32f4xx.h
+ ../Src/time/time.h
  /home/zgrywcio/TMC/Src/drivers/SPI3.c
 CMakeFiles/main.elf.dir/Src/drivers/USART1.c.o
  ../Drivers/CMSIS/Include/core_cm4.h

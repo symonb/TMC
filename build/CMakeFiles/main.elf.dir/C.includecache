@@ -52,7 +52,11 @@ stm32f4xx_conf.h
 
 ../Drivers/CMSIS/Include/system_stm32f4xx.h
 
-/home/zgrywcio/TMC/Src/drivers/SPI3.c
+/home/zgrywcio/TMC/Src/config.h
+
+/home/zgrywcio/TMC/Src/setup.c
 stm32f4xx.h
-/home/zgrywcio/TMC/Src/drivers/stm32f4xx.h
+/home/zgrywcio/TMC/Src/stm32f4xx.h
+config.h
+/home/zgrywcio/TMC/Src/config.h
 

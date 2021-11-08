@@ -455,6 +455,7 @@ static uint8_t sendData(uint8_t channelNumber, uint8_t datalength){
 	enableInts();
 
 	return (true);
+	
 	}
 
 void BNO080_interruptHandler(){
@@ -464,6 +465,7 @@ uint8_t zero[bufferSize];
 memset(zero,0,bufferSize);
 uint8_t rxHeader[headerSize];
 uint8_t rxData[bufferSize];
+
 
 if(txBufLen!=0){
 	ps0_waken(true);
@@ -485,8 +487,10 @@ else
 
 	csn(false);
 	SPI_TransmitReceive(zero, rxHeader, headerSize);
-	int16_t dataLen = ((uint16_t)rxHeader[1] << 8 | rxHeader[0]);
+	uint16_t dataLen = ((uint16_t)rxHeader[1] << 8 | rxHeader[0]);
 	dataLen &=~(1 << 15);
+	if(dataLen>bufferSize)
+		return;
 	if(dataLen==0){
 		csn(true);
 		return ;
