@@ -212,16 +212,79 @@ void initSPI3(void)
 */
 void initTIM1(void){
 RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;
-//timer clock is 168MHz i want 400Hz PWM = 420 000  ARR = 2048
-TIM1->ARR = 2000 - 1;
-TIM1->PSC = 210 - 1;
-TIM1->CCMR1 |= TIM_CCRM1_
+//timer clock is 168MHz i want 400Hz PWM = 420 000  ARR = 2048 frequency is set to 400 Hz 
+
+	// register is buffered and only overflow generate interrupt:
+	TIM1->CR1 |= TIM_CR1_ARPE | TIM_CR1_URS;
+	
+	// PWM mode 1 and output compare 1 preload enable:
+	TIM1->CCMR2 |= TIM_CCMR2_OC1M_1 | TIM_CCMR2_OC1M_2 | TIM_CCMR2_OC1PE;
+	// PWM mode 1 and output compare 2 preload enable:
+	TIM1->CCMR2 |= TIM_CCMR2_OC2M_1 | TIM_CCMR2_OC2M_2 | TIM_CCMR2_OC2PE;
+	// PWM mode 1 and output compare 3 preload enable:
+	TIM1->CCMR2 |= TIM_CCMR2_OC3M_1 | TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3PE;
+	// PWM mode 1 and output compare 4 preload enable:
+	TIM1->CCMR2 |= TIM_CCMR2_OC4M_1 | TIM_CCMR2_OC4M_2 | TIM_CCMR2_OC4PE;
+
+	//channel 1 enable:
+	TIM1->CCER |= TIM_CCER_CC1E;
+	//channel 2 enable:
+	TIM1->CCER |= TIM_CCER_CC2E;
+	//channel 3 enable:
+	TIM1->CCER |= TIM_CCER_CC3E;
+	//channel 4 enable:
+	TIM1->CCER |= TIM_CCER_CC4E;
+
+	TIM1->PSC = 42 - 1; // counter count every 0.5 microsecond (typically 1 step is 1 [us] long but for better resolution and easier Dshot implementation it is 0.5 [us]. Notice that lowest motor_value 2000 step is still 1 [ms] long as in typical PWM)
+	TIM1->ARR = 2000000 / 400 - 1; 		// 1 period of PWM frequency is set to 400 Hz
+
+	TIM1->CCR1 = 2000; 			// PWM length channel 1 (1 [ms])
+	TIM1->CCR2 = 2000; 			// PWM length channel 2 (1 [ms])
+	TIM1->CCR3 = 2000; 			// PWM length channel 3 (1 [ms])
+	TIM1->CCR4 = 2000; 			// PWM length channel 4 (1 [ms])
+
+	//	TIM1 enabling:
+	TIM1->EGR |= TIM_EGR_UG;
+	TIM1->CR1 |= TIM_CR1_CEN;
+	
 }
 void initTIM3(void){
 RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
-TIM3->ARR = 2000 - 1;
-TIM3->PSC = 105 - 1;
-//Timer clock is 84MHz i want 400Hz PWM = 210 000
+//Timer clock is 84MHz i want 400Hz 
+	
+	// register is buffered and only overflow generate interrupt:
+	TIM3->CR1 |= TIM_CR1_ARPE | TIM_CR1_URS;
+	
+	// PWM mode 1 and output compare 1 preload enable:
+	TIM3->CCMR2 |= TIM_CCMR2_OC1M_1 | TIM_CCMR2_OC1M_2 | TIM_CCMR2_OC1PE;
+	// PWM mode 1 and output compare 2 preload enable:
+	TIM3->CCMR2 |= TIM_CCMR2_OC2M_1 | TIM_CCMR2_OC2M_2 | TIM_CCMR2_OC2PE;
+	// PWM mode 1 and output compare 3 preload enable:
+	TIM3->CCMR2 |= TIM_CCMR2_OC3M_1 | TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3PE;
+	// PWM mode 1 and output compare 4 preload enable:
+	TIM3->CCMR2 |= TIM_CCMR2_OC4M_1 | TIM_CCMR2_OC4M_2 | TIM_CCMR2_OC4PE;
+
+	//channel 1 enable:
+	TIM3->CCER |= TIM_CCER_CC1E;
+	//channel 2 enable:
+	TIM3->CCER |= TIM_CCER_CC2E;
+	//channel 3 enable:
+	TIM3->CCER |= TIM_CCER_CC3E;
+	//channel 4 enable:
+	TIM3->CCER |= TIM_CCER_CC4E;
+
+	TIM3->PSC = 42 - 1; // counter count every 0.5 microsecond (typically 1 step is 1 [us] long but for better resolution and easier Dshot implementation it is 0.5 [us]. Notice that lowest motor_value 2000 step is still 1 [ms] long as in typical PWM)
+	TIM3->ARR = 2000000 / 400 - 1; 		// 1 period of PWM frequency is set to 400 Hz
+
+	TIM3->CCR1 = 2000; 			// PWM length channel 1 (1 [ms])
+	TIM3->CCR2 = 2000; 			// PWM length channel 2 (1 [ms])
+	TIM3->CCR3 = 2000; 			// PWM length channel 3 (1 [ms])
+	TIM3->CCR4 = 2000; 			// PWM length channel 4 (1 [ms])
+
+	//	TIM2 enabling:
+	TIM3->EGR |= TIM_EGR_UG;
+	TIM3->CR1 |= TIM_CR1_CEN;
+	
 }
 
 void initSystem()
